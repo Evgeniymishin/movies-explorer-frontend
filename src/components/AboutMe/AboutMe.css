@@ -1,0 +1,74 @@
+.aboutme {
+  margin: 110px 0 125px 0;
+}
+
+.aboutme__container {
+  margin: auto;
+  max-width: 1140px;
+}
+
+.aboutme__main {
+  margin: 66px 0 100px;
+  min-height: 327px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.aboutme__main-text {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.aboutme__title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+  text-align: left;
+  color: #000;
+  margin: 0 0 18px;
+}
+
+.aboutme__position {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  text-align: left;
+  color: #000;
+  margin: 0 0 26px;
+}
+
+.aboutme__bio {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: left;
+  color: #000;
+  margin: 0;
+}
+
+.aboutme__link-container {
+  margin: 0;
+}
+
+.aboutme__link {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000;
+  margin: 0;
+  text-decoration: none;
+}
+
+.aboutme_photo {
+  width: 270px;
+  height: 327px;
+  border-radius: 10px;
+}

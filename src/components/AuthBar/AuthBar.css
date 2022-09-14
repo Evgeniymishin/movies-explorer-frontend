@@ -1,0 +1,29 @@
+.auth-bar {
+  display: flex;
+  height: 100%;
+}
+
+.auth-bar__link {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #fff;
+  margin: 0 30px 0 0;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.auth-bar__link:last-of-type {
+  margin: 0;
+}
+
+.auth-bar__link_color_green {
+  background-color: #2BE080;
+  width: 76px;
+  color: #000;
+  border-radius: 3px;
+}

@@ -1,0 +1,33 @@
+.timeline {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 36px 36px;
+  text-align: center;
+  align-items: center;
+}
+
+.timeline__cell {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000;
+  min-height: 36px;
+  margin: 0;
+  align-self: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.timeline__cell_green {
+  background-color: #2BE080;
+}
+
+.timeline__cell_gray {
+  background-color: #F2F2F2;
+}
+
+.timeline__span {
+  color: #A0A0A0;
+}
