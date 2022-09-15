@@ -1,0 +1,24 @@
+.navigation {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navigation__element {
+  list-style-type: none;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  color: #000;
+  margin: 0 16px 0 0;
+  cursor: pointer;
+}
+
+.navigation__element:last-of-type {
+  margin: 0;
+}
+
+.navigation__element_active {
+  font-weight: 500;
+}

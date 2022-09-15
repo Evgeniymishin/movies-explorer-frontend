@@ -1,0 +1,19 @@
+.accountbar {
+  background-color: #fff;
+  min-width: 100px;
+  min-height: 32px;
+}
+
+.accountbar__text {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 12px;
+  color: #000;
+  margin: 0 7px 0 0;
+}
+
+.accountbar__icon-container {
+  background-color: #f9f9f9;
+  border-radius: 100%;
+}
