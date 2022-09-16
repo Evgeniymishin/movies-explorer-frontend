@@ -9,8 +9,7 @@ export default function Header() {
     <section className='header header__color_grey'>
       <div className='header__container'>
         <Logo />
-        <Navigation />
-        <AccountBar />
+        <AuthBar />
       </div>
     </section>
   )

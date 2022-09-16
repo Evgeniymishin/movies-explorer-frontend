@@ -2,6 +2,9 @@
   background-color: #fff;
   min-width: 100px;
   min-height: 32px;
+  display: flex;
+  align-items: center;
+  border-radius: 40px;
 }
 
 .accountbar__text {
@@ -10,10 +13,18 @@
   font-size: 13px;
   line-height: 12px;
   color: #000;
-  margin: 0 7px 0 0;
+  margin: 0 7px 0 11px;
 }
 
 .accountbar__icon-container {
   background-color: #f9f9f9;
-  border-radius: 100%;
+  border-radius: 50px;
+  width: 26px;
+  height: 26px;
+  margin: 0 3px 0 0;
+  display: flex;
+}
+
+.accountbar__icon {
+  margin: auto;
 }
