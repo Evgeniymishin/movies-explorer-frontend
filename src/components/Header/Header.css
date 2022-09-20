@@ -8,7 +8,7 @@
 
 .header__container {
   max-width: 1140px;
-  margin: 18px auto 18px;
+  margin: 18px auto 0;
   display: flex;
   justify-content: space-between;
   align-items: center;

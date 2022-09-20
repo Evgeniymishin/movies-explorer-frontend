@@ -5,7 +5,7 @@ import Portfolio from '../Portfolio/Portfolio';
 
 export default function AboutMe() {
   return (
-      <section className='aboutme'>
+      <section className='aboutme' id='aboutme'>
         <div className='aboutme__container'>
           <SectionHeading headingText={'Студент'} />
           <div className='aboutme__main'>

@@ -15,6 +15,12 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: opacity 0.2s;
+  opacity: 100%;
+}
+
+.auth-bar__link:hover {
+  opacity: 50%;
 }
 
 .auth-bar__link:last-of-type {

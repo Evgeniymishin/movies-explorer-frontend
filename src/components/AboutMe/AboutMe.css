@@ -1,9 +1,9 @@
 .aboutme {
-  margin: 110px 0 125px 0;
+  background-color: #fff;
 }
 
 .aboutme__container {
-  margin: auto;
+  margin: 110px auto 104px;
   max-width: 1140px;
 }
 
@@ -65,6 +65,12 @@
   color: #000;
   margin: 0;
   text-decoration: none;
+  transition: opacity 0.2s;
+  opacity: 100%;
+}
+
+.aboutme__link:hover {
+  opacity: 50%
 }
 
 .aboutme_photo {
