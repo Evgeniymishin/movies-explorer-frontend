@@ -14,13 +14,13 @@ export default function NavTab() {
     <section className="navtab">
       <ul className='navtab__list'>
         <li className='navtab__list-element'>
-          <HashLink to='/#about-project' scroll={scrollIntoView}>О проекте</HashLink>
+          <HashLink to='/#about-project' scroll={scrollIntoView} className='navtab__link'>О проекте</HashLink>
         </li>
         <li className='navtab__list-element'>
-          <HashLink to='/#techs' scroll={scrollIntoView}>Технологии</HashLink>
+          <HashLink to='/#techs' scroll={scrollIntoView} className='navtab__link'>Технологии</HashLink>
         </li>
         <li className='navtab__list-element'>
-        <HashLink to='/#aboutme' scroll={scrollIntoView}>Студент</HashLink>
+        <HashLink to='/#aboutme' scroll={scrollIntoView} className='navtab__link'>Студент</HashLink>
         </li>
       </ul>
     </section>

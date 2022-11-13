@@ -1,0 +1,47 @@
+.filter-checkbox__button {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 36px;
+  height: 20px;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+  opacity: 100%;
+  transition: opacity 0.2s;
+}
+
+.filter-checkbox__button:hover {
+  opacity: 80%;
+}
+
+.filter-checkbox__button_active_true {
+  background-image: url(../../images/switch_button_active.svg);
+}
+
+.filter-checkbox__button_active_false {
+  background-image: url(../../images/switch_button_inactive.svg);
+}
+
+.filter-checkbox__label {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #000;
+  margin: 0 0 0 12px;
+}
+
+.filer-checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .filter-checkbox__label {
+    font-size: 11px;
+    line-height: 18px;
+  }
+}
