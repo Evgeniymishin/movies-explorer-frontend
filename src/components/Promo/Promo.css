@@ -1,5 +1,5 @@
 .promo {
-  background: #5C5C5C url(../../images/promo_logo.svg) no-repeat 50%;
+  background: #5c5c5c url(../../images/promo_logo.svg) no-repeat 50%;
   min-height: 524px;
   position: relative;
   display: flex;
@@ -23,8 +23,6 @@
   .promo {
     min-height: 784px;
   }
-
-  
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
@@ -33,7 +31,7 @@
     background-size: 248px 248px;
     margin-bottom: 1px;
   }
-  
+
   .promo__title {
     max-width: 300px;
     font-style: normal;

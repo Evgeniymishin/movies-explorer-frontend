@@ -10,10 +10,7 @@ import Header from '../Header/Header';
 export default function Main() {
   return (
     <>
-      <Header
-        color="grey"
-        isLoggedIn={false}
-      />
+      <Header color='grey' isLoggedIn={false} />
       <Promo />
       <NavTab />
       <AboutProject />

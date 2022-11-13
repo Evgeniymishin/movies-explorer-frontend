@@ -7,15 +7,9 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 export default function SavedMovies() {
   return (
     <>
-      <Header
-        color="white"
-        isLoggedIn={true}
-        isFilmActive={false}
-      />
+      <Header color='white' isLoggedIn={true} isFilmActive={false} />
       <SearchForm />
-      <MoviesCardList
-        paginationButtonVisible={false}
-      />
+      <MoviesCardList paginationButtonVisible={false} />
       <Footer />
     </>
   );

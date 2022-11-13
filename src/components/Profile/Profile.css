@@ -1,5 +1,4 @@
 .profile {
-
 }
 
 .profile__container {
@@ -24,7 +23,7 @@
   justify-content: space-between;
   margin: 16px 0 0;
   padding-bottom: 16px;
-  border-bottom: 1px solid #E8E8E8;
+  border-bottom: 1px solid #e8e8e8;
 }
 
 .profile__field-container:last-of-type {
@@ -76,7 +75,7 @@
 }
 
 .profile__btn_color_red {
-  color: #EE3465;
+  color: #ee3465;
   font-weight: 500;
 }
 

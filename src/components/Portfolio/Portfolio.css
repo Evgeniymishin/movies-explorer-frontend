@@ -4,7 +4,7 @@
   font-size: 18px;
   line-height: 20px;
   text-align: left;
-  color: #A0A0A0;
+  color: #a0a0a0;
   margin: 0 0 45px;
 }
 
@@ -15,7 +15,7 @@
 
 .portfolio__element-container {
   padding-bottom: 14px;
-  border-bottom: 1px solid #E8E8E8;
+  border-bottom: 1px solid #e8e8e8;
   margin: 0 0 16px;
   display: flex;
   justify-content: space-between;

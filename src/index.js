@@ -1,5 +1,5 @@
 import './vendor/normalize.css';
-import './vendor/fonts/fonts.css'
+import './vendor/fonts/fonts.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -14,4 +14,3 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
-

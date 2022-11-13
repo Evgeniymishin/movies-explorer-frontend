@@ -6,13 +6,12 @@
   margin: 73px auto 10px;
   max-width: 1140px;
   padding-bottom: 70px;
-  border-bottom: 1px solid #E8E8E8;
-  
+  border-bottom: 1px solid #e8e8e8;
 }
 
 .search-form__area {
   min-height: 46px;
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
   border-radius: 40px;
   display: flex;
   position: relative;
@@ -27,14 +26,14 @@
   line-height: 17px;
   border: none;
   padding: 0;
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
   margin: 0 22px 0;
   outline: none;
   width: 100%;
 }
 
 .search-form__label {
-  color: #A0A0A0;
+  color: #a0a0a0;
   align-self: center;
 }
 

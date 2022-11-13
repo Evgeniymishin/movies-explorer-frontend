@@ -1,7 +1,6 @@
 import './AccountBar.css';
-import icon from '../../images/accbar_icon.svg'
+import icon from '../../images/accbar_icon.svg';
 import { HashLink } from 'react-router-hash-link';
-
 
 export default function AccountBar() {
   function scrollIntoView(el) {
@@ -10,9 +9,13 @@ export default function AccountBar() {
       block: 'start',
     });
   }
-  
+
   return (
-    <HashLink to='/profile' scroll={scrollIntoView} className='accountbar__link'>
+    <HashLink
+      to='/profile'
+      scroll={scrollIntoView}
+      className='accountbar__link'
+    >
       <div className='accountbar'>
         <p className='accountbar__text'>Аккаунт</p>
         <div className='accountbar__icon-container'>
@@ -20,5 +23,5 @@ export default function AccountBar() {
         </div>
       </div>
     </HashLink>
-  )
+  );
 }
