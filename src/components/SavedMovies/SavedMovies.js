@@ -8,8 +8,10 @@ export default function SavedMovies() {
   return (
     <>
       <Header color='white' isLoggedIn={true} isFilmActive={false} />
-      <SearchForm />
-      <MoviesCardList paginationButtonVisible={false} />
+      <main>
+        <SearchForm />
+        <MoviesCardList paginationButtonVisible={false} />
+      </main>
       <Footer />
     </>
   );

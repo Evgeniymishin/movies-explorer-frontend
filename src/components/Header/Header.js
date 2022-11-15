@@ -12,7 +12,7 @@ export default function Header({
   openBurger,
 }) {
   return (
-    <section className={`header header__color_${color}`}>
+    <header className={`header header__color_${color}`}>
       <div className='header__container'>
         <Logo />
         {!isLoggedIn && <AuthBar />}
@@ -24,7 +24,7 @@ export default function Header({
           </>
         )}
       </div>
-    </section>
+    </header>
   );
 }
 

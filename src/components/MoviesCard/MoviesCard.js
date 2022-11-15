@@ -5,7 +5,7 @@ export default function MoviesCard({ buttonType, buttonText }) {
   return (
     <figure className='movies-card'>
       <img className='movies-card__img' src={img} alt='Изображение' />
-      <dev className='movies-card__caption-container'>
+      <div className='movies-card__caption-container'>
         <figcaption className='movies-card__caption'>
           33 слова о дизайне
         </figcaption>
@@ -15,7 +15,7 @@ export default function MoviesCard({ buttonType, buttonText }) {
         <button className={`movies-card__${buttonType}-btn`}>
           {buttonText}
         </button>
-      </dev>
+      </div>
     </figure>
   );
 }

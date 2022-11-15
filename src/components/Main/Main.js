@@ -11,11 +11,13 @@ export default function Main() {
   return (
     <>
       <Header color='grey' isLoggedIn={false} />
-      <Promo />
-      <NavTab />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
+      <main>
+        <Promo />
+        <NavTab />
+        <AboutProject />
+        <Techs />
+        <AboutMe />
+      </main>
       <Footer />
     </>
   );

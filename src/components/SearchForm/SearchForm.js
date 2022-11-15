@@ -1,5 +1,6 @@
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
+import { useFocus } from 'react';
 
 export default function SearchForm() {
   return (
@@ -7,9 +8,9 @@ export default function SearchForm() {
       <form className='search-form__container'>
         <div className='search-form__area'>
           <label className='search-form__label'>
-            <input className='search-form__input' placeholder='Фильм'></input>
+            <input className='search-form__input' placeholder='Фильм' required></input>
           </label>
-          <button className='search-form__button' type='button'></button>
+          <button className='search-form__button' type='submit'></button>
         </div>
         <FilterCheckbox />
       </form>

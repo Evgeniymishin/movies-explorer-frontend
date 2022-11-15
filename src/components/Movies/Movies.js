@@ -14,8 +14,10 @@ export default function Movies({ openBurger, isBurgerOpen, closeBurger }) {
         isFilmActive={true}
         openBurger={openBurger}
       />
-      <SearchForm />
-      <MoviesCardList paginationButtonVisible={true} />
+      <main className='main'>
+        <SearchForm />
+        <MoviesCardList paginationButtonVisible={true} />
+      </main>
       <Footer />
       <BurgerMenu
         isMovies={true}
