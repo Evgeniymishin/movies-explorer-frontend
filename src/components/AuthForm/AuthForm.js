@@ -11,12 +11,13 @@ export default function AuthForm(props) {
       <h1 className='auth-form__title'>{props.title}</h1>
       <form className='auth-form'>{props.children}</form>
       <div className='auth-form__btn-container'>
-        <button className='auth-form__btn'>{props.btnName}</button>
+        <button className='auth-form__btn' type='button'>{props.btnName}</button>
         <div className='auth-form__redirect-container'>
           <p className='auth-form__redirect-text'>{props.redirectText}</p>
           <button
             className='auth-from__redirect-btn'
             onClick={() => navigate(props.redirectLink)}
+            type='button'
           >
             {props.redirectLinkText}
           </button>

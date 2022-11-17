@@ -20,8 +20,8 @@ export default function Profile() {
               </div>
             </div>
             <div className='profile__btn-container'>
-              <button className='profile__btn'>Редактировать</button>
-              <button className='profile__btn profile__btn_color_red'>
+              <button className='profile__btn' type='button'>Редактировать</button>
+              <button className='profile__btn profile__btn_color_red' type='button'>
                 Выйти из аккаунта
               </button>
             </div>

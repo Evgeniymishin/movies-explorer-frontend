@@ -8,7 +8,7 @@ export default function SavedMovies() {
   return (
     <>
       <Header color='white' isLoggedIn={true} isFilmActive={false} />
-      <main>
+      <main className='main'>
         <SearchForm />
         <MoviesCardList paginationButtonVisible={false} />
       </main>

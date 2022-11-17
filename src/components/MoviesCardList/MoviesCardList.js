@@ -44,7 +44,7 @@ export default function MoviesCardList({ paginationButtonVisible }) {
           'movie-card-list__more-btn-container_visible'
         }`}
       >
-        <button className='movie-card-list__more-btn'>Еще</button>
+        <button className='movie-card-list__more-btn' type='button'>Еще</button>
       </div>
     </section>
   );

@@ -12,7 +12,7 @@ export default function MoviesCard({ buttonType, buttonText }) {
         <div className='movies-card__duration-container'>
           <div className='movies-card__duration'>1ч 17м</div>
         </div>
-        <button className={`movies-card__${buttonType}-btn`}>
+        <button className={`movies-card__${buttonType}-btn`} type='button'>
           {buttonText}
         </button>
       </div>

@@ -1,6 +1,5 @@
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
-import { useFocus } from 'react';
 
 export default function SearchForm() {
   return (

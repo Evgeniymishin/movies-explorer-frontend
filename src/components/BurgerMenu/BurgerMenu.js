@@ -60,7 +60,7 @@ export default function BurgerMenu({
             </ul>
           </nav>
           <AccountBar />
-          <button className='burger__close-btn' onClick={closeBurger}></button>
+          <button className='burger__close-btn' onClick={closeBurger} type='button'></button>
         </div>
       </div>
     </div>
