@@ -1,0 +1,58 @@
+.timeline {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 36px 36px;
+  text-align: center;
+  align-items: center;
+}
+
+.timeline__cell {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000;
+  min-height: 36px;
+  margin: 0;
+  align-self: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.timeline__cell_green {
+  background-color: #2be080;
+}
+
+.timeline__cell_gray {
+  background-color: #f2f2f2;
+}
+
+.timeline__span {
+  color: #a0a0a0;
+  margin: 8px 0 0;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .timeline {
+    grid-template-columns: 140px 528px;
+    max-width: 668px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .timeline {
+    grid-template-columns: 100px 184px;
+    grid-template-rows: 35px 35px;
+  }
+
+  .timeline__cell {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .timeline__span {
+    margin: 0;
+  }
+}

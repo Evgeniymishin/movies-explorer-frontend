@@ -1,0 +1,48 @@
+.techblocks {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  grid-template-columns: repeat(7, 90px);
+  gap: 10px;
+}
+
+.techblocks__element {
+  list-style: none;
+  min-height: 60px;
+  background-color: #e8e8e8;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: -0.04em;
+  text-align: center;
+  color: #000;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .techblocks {
+    grid-template-columns: repeat(7, 84px);
+  }
+
+  .techblocks__element {
+    min-height: 57px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .techblocks {
+    grid-template-columns: repeat(2, 84px);
+  }
+
+  .techblocks__element {
+    min-height: 57px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

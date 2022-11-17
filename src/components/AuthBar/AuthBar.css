@@ -1,0 +1,53 @@
+.auth-bar {
+  display: flex;
+  height: 100%;
+}
+
+.auth-bar__link {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #fff;
+  margin: 0 30px 0 0;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  opacity: 100%;
+  border: 0;
+  padding: 0;
+}
+
+.auth-bar__link:hover {
+  opacity: 50%;
+}
+
+.auth-bar__link:last-of-type {
+  margin: 0;
+}
+
+.auth-bar__link_color_green {
+  background-color: #2be080;
+  width: 76px;
+  color: #000;
+  border-radius: 3px;
+}
+
+.auth-bar__link_color_gray {
+  background-color: #5c5c5c;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .auth-bar__link {
+    font-size: 10px;
+    margin: 0 14px 0 0;
+    min-height: 26px;
+  }
+
+  .auth-bar__link_color_green {
+    width: 54px;
+  }
+}
