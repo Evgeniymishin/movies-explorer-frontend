@@ -8,8 +8,9 @@ import './Header.css';
 export default function Header({
   color,
   isLoggedIn,
-  isFilmActive,
+  activeLink,
   openBurger,
+  size,
 }) {
   return (
     <header className={`header header__color_${color}`}>
@@ -18,14 +19,12 @@ export default function Header({
         {!isLoggedIn && <AuthBar />}
         {isLoggedIn && (
           <>
-            <Navigation isFilmActive={isFilmActive} />
-            {/* <AccountBar /> */}
-            <BurgerButton openBurger={openBurger} />
+            {<Navigation activeLink={activeLink} />}
+            {size > 780 && <AccountBar />}
+            {size <= 780 && <BurgerButton openBurger={openBurger} />}
           </>
         )}
       </div>
     </header>
   );
 }
-
-// Пока не решил вопрос как по условиям показать бургерное меню или иконку аккаунта при смене расширения

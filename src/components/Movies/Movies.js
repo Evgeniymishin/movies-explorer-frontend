@@ -5,18 +5,43 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
-export default function Movies({ openBurger, isBurgerOpen, closeBurger }) {
+export default function Movies({
+  openBurger,
+  isBurgerOpen,
+  closeBurger,
+  cardList,
+  isLoading,
+  onSearchSubmit,
+  currentMovieLength,
+  onClickMore,
+  isLoggedIn,
+  size,
+  onBtnClick,
+  savedMovies,
+  shortSwitchHandle,
+}) {
   return (
     <>
       <Header
         color='white'
-        isLoggedIn={true}
-        isFilmActive={true}
+        isLoggedIn={isLoggedIn}
+        activeLink='movie'
         openBurger={openBurger}
+        size={size}
       />
       <main className='main'>
-        <SearchForm />
-        <MoviesCardList paginationButtonVisible={true} />
+        <SearchForm
+          onSearchSubmit={onSearchSubmit}
+          shortSwitchHandle={shortSwitchHandle}
+        />
+        <MoviesCardList
+          cardList={cardList}
+          isLoading={isLoading}
+          currentMovieLength={currentMovieLength}
+          onClickMore={onClickMore}
+          onBtnClick={onBtnClick}
+          savedMovies={savedMovies}
+        />
       </main>
       <Footer />
       <BurgerMenu

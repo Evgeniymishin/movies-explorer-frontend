@@ -5,24 +5,42 @@ import { useNavigate } from 'react-router-dom';
 export default function AuthForm(props) {
   const navigate = useNavigate();
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (props.isValid) {
+      props.onSubmit(props.values);
+    }
+  }
+
   return (
     <section className='auth-form__container'>
       <Logo />
       <h1 className='auth-form__title'>{props.title}</h1>
-      <form className='auth-form'>{props.children}</form>
-      <div className='auth-form__btn-container'>
-        <button className='auth-form__btn' type='button'>{props.btnName}</button>
-        <div className='auth-form__redirect-container'>
-          <p className='auth-form__redirect-text'>{props.redirectText}</p>
+      <form className='auth-form' onSubmit={handleSubmit}>
+        {props.children}
+        <div className='auth-form__btn-container'>
+          {props.errorMsg && (
+            <p className='auth-form__err-msg'>{props.errorMsg}</p>
+          )}
           <button
-            className='auth-from__redirect-btn'
-            onClick={() => navigate(props.redirectLink)}
-            type='button'
+            className='auth-form__btn'
+            type='submit'
+            disabled={!props.isValid}
           >
-            {props.redirectLinkText}
+            {props.btnName}
           </button>
+          <div className='auth-form__redirect-container'>
+            <p className='auth-form__redirect-text'>{props.redirectText}</p>
+            <button
+              className='auth-from__redirect-btn'
+              onClick={() => navigate(props.redirectLink)}
+              type='button'
+            >
+              {props.redirectLinkText}
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
     </section>
   );
 }
