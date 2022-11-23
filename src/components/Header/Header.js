@@ -11,6 +11,7 @@ export default function Header({
   activeLink,
   openBurger,
   size,
+  closeBurger,
 }) {
   return (
     <header className={`header header__color_${color}`}>
@@ -20,7 +21,7 @@ export default function Header({
         {isLoggedIn && (
           <>
             {<Navigation activeLink={activeLink} />}
-            {size > 780 && <AccountBar />}
+            {size > 780 && <AccountBar closeBurger={closeBurger} />}
             {size <= 780 && <BurgerButton openBurger={openBurger} />}
           </>
         )}

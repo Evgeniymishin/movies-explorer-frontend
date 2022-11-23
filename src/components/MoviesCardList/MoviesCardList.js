@@ -11,7 +11,6 @@ export default function MoviesCardList({
   onBtnClick,
   savedMovies,
 }) {
-  console.log(cardList);
   return (
     <section className='movie-card-list'>
       {isLoading && <Preloader />}

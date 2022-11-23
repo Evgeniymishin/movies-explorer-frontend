@@ -92,33 +92,31 @@ export default function App() {
     register({ name, password, email })
       .then((res) => {
         if (res) {
-          setErrorMsg('');
           setIsLoggedIn(true);
+          setErrorMsg('');
           navigate('/movies');
         }
       })
       .catch((err) => {
         setIsLoggedIn(false);
         setErrorMsg('При регистрации пользователя произошла ошибка.');
-        console.log(err);
-      })
-      .finally(() => {});
+      });
   };
 
   const handleLogin = ({ password, email }) => {
     login({ password, email })
       .then((res) => {
         if (res) {
-          setErrorMsg('');
           setIsLoggedIn(true);
+          setErrorMsg('');
           setCurrentUser({ password, email });
 
           navigate('/movies');
         }
       })
       .catch((err) => {
-        setErrorMsg('Вы ввели неправильный логин или пароль.');
         setIsLoggedIn(false);
+        setErrorMsg('Вы ввели неправильный логин или пароль.');
       });
   };
 
@@ -143,7 +141,7 @@ export default function App() {
       const shortMovies = filteredMovies.filter((item) => item.duration <= 40);
       setFilteredMovies(shortMovies);
     } else {
-      setFilteredMovies(filteredMovies);
+      setFilteredMovies(allMovies);
     }
   };
 
@@ -157,17 +155,15 @@ export default function App() {
       );
       setFilteredSavedMovies(shortMovies);
     } else {
-      setFilteredSavedMovies(filteredSavedMovies);
+      setFilteredSavedMovies(savedMovies);
     }
   };
 
   const userUpdateHandle = (user) => {
-    console.log(user);
     patchUserInfo(user)
       .then((res) => setCurrentUser(res))
       .catch((err) => {
         setErrorMsg('При обновлении профиля произошла ошибка.');
-        console.log(`При обновлении профиля произошла ошибка: ${err}`);
       });
   };
 
@@ -251,7 +247,15 @@ export default function App() {
           <Route
             exact
             path='/'
-            element={<Main isLoggedIn={isLoggedIn} size={size} />}
+            element={
+              <Main
+                isLoggedIn={isLoggedIn}
+                size={size}
+                isBurgerOpen={isBurgerOpen}
+                closeBurger={closeBurger}
+                openBurger={handleClickBurgerButton}
+              />
+            }
           />
           <Route
             exact
@@ -313,6 +317,8 @@ export default function App() {
                   onUserUpdate={userUpdateHandle}
                   onSignOut={signOutHandle}
                   errorMsg={errorMsg}
+                  isBurgerOpen={isBurgerOpen}
+                  closeBurger={closeBurger}
                 />
               </ProtectedRoute>
             }

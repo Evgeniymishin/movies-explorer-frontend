@@ -3,6 +3,7 @@ import './Profile.css';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 export default function Profile({
   isLoggedIn,
@@ -11,6 +12,8 @@ export default function Profile({
   onUserUpdate,
   onSignOut,
   errorMsg,
+  isBurgerOpen,
+  closeBurger,
 }) {
   const user = useContext(CurrentUserContext);
   const [nameInput, setNameInput] = useState(user.name);
@@ -57,6 +60,7 @@ export default function Profile({
         activeLink='saved-movie'
         openBurger={openBurger}
         size={size}
+        closeBurger={closeBurger}
       />
       <main>
         <section className='profile'>
@@ -109,6 +113,7 @@ export default function Profile({
           </div>
         </section>
       </main>
+      <BurgerMenu isBurgerOpen={isBurgerOpen} closeBurger={closeBurger} />
     </>
   );
 }

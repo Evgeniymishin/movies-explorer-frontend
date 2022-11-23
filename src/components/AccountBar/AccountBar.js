@@ -2,7 +2,7 @@ import './AccountBar.css';
 import icon from '../../images/accbar_icon.svg';
 import { HashLink } from 'react-router-hash-link';
 
-export default function AccountBar() {
+export default function AccountBar({ closeBurger }) {
   function scrollIntoView(el) {
     el.scrollIntoView({
       behavior: 'smooth',
@@ -15,6 +15,7 @@ export default function AccountBar() {
       to='/profile'
       scroll={scrollIntoView}
       className='accountbar__link'
+      onClick={closeBurger}
     >
       <div className='accountbar'>
         <p className='accountbar__text'>Аккаунт</p>

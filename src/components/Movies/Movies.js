@@ -7,8 +7,6 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 export default function Movies({
   openBurger,
-  isBurgerOpen,
-  closeBurger,
   cardList,
   isLoading,
   onSearchSubmit,
@@ -19,6 +17,8 @@ export default function Movies({
   onBtnClick,
   savedMovies,
   shortSwitchHandle,
+  isBurgerOpen,
+  closeBurger,
 }) {
   return (
     <>
@@ -28,6 +28,7 @@ export default function Movies({
         activeLink='movie'
         openBurger={openBurger}
         size={size}
+        closeBurger={closeBurger}
       />
       <main className='main'>
         <SearchForm
@@ -44,11 +45,7 @@ export default function Movies({
         />
       </main>
       <Footer />
-      <BurgerMenu
-        isMovies={true}
-        isBurgerOpen={isBurgerOpen}
-        closeBurger={closeBurger}
-      />
+      <BurgerMenu isBurgerOpen={isBurgerOpen} closeBurger={closeBurger} />
     </>
   );
 }

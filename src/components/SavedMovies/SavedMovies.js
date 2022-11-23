@@ -28,6 +28,7 @@ export default function SavedMovies({
         activeLink='saved-movie'
         openBurger={openBurger}
         size={size}
+        closeBurger={closeBurger}
       />
       <main className='main'>
         <SearchForm
@@ -44,11 +45,7 @@ export default function SavedMovies({
         />
       </main>
       <Footer />
-      <BurgerMenu
-        isMovies={true}
-        isBurgerOpen={isBurgerOpen}
-        closeBurger={closeBurger}
-      />
+      <BurgerMenu isBurgerOpen={isBurgerOpen} closeBurger={closeBurger} />
     </>
   );
 }
