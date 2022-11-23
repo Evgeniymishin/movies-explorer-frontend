@@ -21,6 +21,8 @@ export const getApiUserInfo = () => {
     method: 'GET',
     credentials: 'include',
     headers: headers,
+    sameSite: 'none',
+    secure: true,
   }).then(handleResponse);
 };
 
@@ -29,6 +31,8 @@ export const patchUserInfo = (user) => {
     method: 'PATCH',
     headers: headers,
     credentials: 'include',
+    sameSite: 'none',
+    secure: true,
     body: JSON.stringify({
       name: user.name,
       email: user.email,
@@ -41,6 +45,8 @@ export const getSavedMovies = () => {
     method: 'GET',
     credentials: 'include',
     headers: headers,
+    sameSite: 'none',
+    secure: true,
   }).then(handleResponse);
 };
 
@@ -75,5 +81,7 @@ export const deleteMovie = (movie) => {
     method: 'DELETE',
     headers: headers,
     credentials: 'include',
+    sameSite: 'none',
+    secure: true,
   }).then(handleResponse);
 };

@@ -11,13 +11,14 @@ export default function MoviesCardList({
   onBtnClick,
   savedMovies,
 }) {
+  console.log(cardList);
   return (
     <section className='movie-card-list'>
       {isLoading && <Preloader />}
       {!isLoading && (
         <div className='movie-card-list__grid'>
           {cardList
-            .map((card, id) => {
+            .map((card) => {
               return (
                 <MoviesCard
                   card={card}

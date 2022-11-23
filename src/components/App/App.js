@@ -99,6 +99,7 @@ export default function App() {
       })
       .catch((err) => {
         setIsLoggedIn(false);
+        setErrorMsg('При регистрации пользователя произошла ошибка.');
         console.log(err);
       })
       .finally(() => {});
@@ -137,26 +138,26 @@ export default function App() {
   };
 
   const shortMovieSwitchHandle = (checked) => {
-    const filterMovies = JSON.parse(localStorage.getItem('filteredMovies'));
-    if (checked === '0' && filterMovies) {
-      const shortMovies = filterMovies.filter((item) => item.duration <= 40);
+    // const filterMovies = JSON.parse(localStorage.getItem('filteredMovies'));
+    if (checked === '0' && filteredMovies) {
+      const shortMovies = filteredMovies.filter((item) => item.duration <= 40);
       setFilteredMovies(shortMovies);
     } else {
-      setFilteredMovies(filterMovies);
+      setFilteredMovies(filteredMovies);
     }
   };
 
   const shortSaveMovieSwitchHandle = (checked) => {
-    const filteredSavedMovies = JSON.parse(
-      localStorage.getItem('filteredSavedMovies')
-    );
+    // const filteredSavedMovies = JSON.parse(
+    //   localStorage.getItem('filteredSavedMovies')
+    // );
     if (checked === '0' && filteredSavedMovies) {
       const shortMovies = filteredSavedMovies.filter(
         (item) => item.duration <= 40
       );
-      setFilteredMovies(shortMovies);
+      setFilteredSavedMovies(shortMovies);
     } else {
-      setFilteredMovies(filteredSavedMovies);
+      setFilteredSavedMovies(filteredSavedMovies);
     }
   };
 
