@@ -60,6 +60,15 @@
   text-align: center;
 }
 
+.profile__success-msg {
+  color: #2be080;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+}
+
 .profile__btn {
   border: none;
   background-color: transparent;

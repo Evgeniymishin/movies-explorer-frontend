@@ -4,22 +4,49 @@ import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
+import { useState, useEffect } from 'react';
 
 export default function SavedMovies({
   openBurger,
   isBurgerOpen,
   closeBurger,
-  cardList,
   isLoading,
-  onSearchSubmit,
+  setIsLoading,
   currentMovieLength,
   onClickMore,
   isLoggedIn,
   size,
   savedMovies,
-  onBtnClick,
-  shortSwitchHandle,
+  setFilteredSavedMovies,
+  filteredSavedMovies,
+  onDelete,
 }) {
+  const [isShortFilm, setIsShortFilm] = useState('false');
+  const [isEmptySearchResult, setIsEmptySearchResult] = useState('false');
+
+  useEffect(() => {
+    setFilteredSavedMovies(savedMovies);
+  }, [savedMovies]);
+
+  const handleSearch = (value) => {
+    setIsLoading(true);
+    const shortMovies = savedMovies.filter((item) => item.duration <= 40);
+    const movies = isShortFilm === 'true' ? shortMovies : savedMovies;
+    const newFilteredMovies = movies.filter((movie) => {
+      value = value.toLowerCase();
+      const nameEN = movie.nameEN.toLowerCase();
+      const nameRU = movie.nameRU.toLowerCase();
+      return (nameEN && nameEN.toLowerCase().includes(value) && value !== '') ||
+        (nameRU && nameRU.toLowerCase().includes(value) && value !== '')
+        ? value
+        : null;
+    });
+
+    setFilteredSavedMovies(newFilteredMovies);
+    setIsEmptySearchResult(newFilteredMovies.length === 0 ? 'true' : 'false');
+    setIsLoading(false);
+  };
+
   return (
     <>
       <Header
@@ -32,16 +59,18 @@ export default function SavedMovies({
       />
       <main className='main'>
         <SearchForm
-          onSearchSubmit={onSearchSubmit}
-          shortSwitchHandle={shortSwitchHandle}
+          onSearchSubmit={handleSearch}
+          isShortFilm={isShortFilm}
+          setIsShortFilm={setIsShortFilm}
         />
         <MoviesCardList
-          cardList={cardList}
+          cardList={filteredSavedMovies}
           isLoading={isLoading}
           currentMovieLength={currentMovieLength}
           onClickMore={onClickMore}
           savedMovies={savedMovies}
-          onBtnClick={onBtnClick}
+          onDelete={onDelete}
+          isEmptySearchResult={isEmptySearchResult}
         />
       </main>
       <Footer />

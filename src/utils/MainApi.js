@@ -26,7 +26,7 @@ export const getApiUserInfo = () => {
   }).then(handleResponse);
 };
 
-export const patchUserInfo = (user) => {
+export const patchUserInfo = ({ name, email }) => {
   return fetch(`${baseApiURL}/users/me`, {
     method: 'PATCH',
     headers: headers,
@@ -34,8 +34,8 @@ export const patchUserInfo = (user) => {
     sameSite: 'none',
     secure: true,
     body: JSON.stringify({
-      name: user.name,
-      email: user.email,
+      name,
+      email,
     }),
   }).then(handleResponse);
 };
@@ -51,7 +51,6 @@ export const getSavedMovies = () => {
 };
 
 export const saveMovies = (movie) => {
-  console.log(movie.image.url);
   return fetch(`${baseApiURL}/movies`, {
     method: 'POST',
     headers: headers,

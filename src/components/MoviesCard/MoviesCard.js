@@ -2,7 +2,7 @@ import './MoviesCard.css';
 import { baseMoviesApiURL } from '../../utils/constants';
 import { useLocation } from 'react-router-dom';
 
-export default function MoviesCard({ card, onBtnClick, savedMovies }) {
+export default function MoviesCard({ card, savedMovies, onLike, onDelete }) {
   const location = useLocation();
   const duration = `${Math.floor(card.duration / 60)}ч ${card.duration % 60}м`;
 
@@ -19,7 +19,7 @@ export default function MoviesCard({ card, onBtnClick, savedMovies }) {
   const buttonText = buttonType === 'save' ? 'Сохранить' : '';
 
   const handleBtnClick = () => {
-    onBtnClick(card);
+    location.pathname === '/movies' ? onLike(card) : onDelete(card);
   };
 
   return (

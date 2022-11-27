@@ -29,3 +29,11 @@ export const login = (data) => {
     body: JSON.stringify(data),
   }).then(handleResponse);
 };
+
+export const logout = () => {
+  return fetch(`${baseApiURL}/signout`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: headers,
+  }).then(handleResponse);
+};

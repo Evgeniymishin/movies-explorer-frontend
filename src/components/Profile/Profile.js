@@ -1,8 +1,7 @@
 import Header from '../Header/Header';
 import './Profile.css';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
-import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useContext, useState, useEffect } from 'react';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 export default function Profile({
@@ -14,30 +13,28 @@ export default function Profile({
   errorMsg,
   isBurgerOpen,
   closeBurger,
+  successMsg,
 }) {
   const user = useContext(CurrentUserContext);
   const [nameInput, setNameInput] = useState(user.name);
   const [emailInput, setEmailInput] = useState(user.email);
   const [isDisabledBtn, setisDisabledBtn] = useState(true);
-  const navigate = useNavigate();
 
   const handleUserUpdate = () => {
     onUserUpdate({ name: nameInput, email: emailInput });
+    setisDisabledBtn(true);
   };
 
   const handleSignOunt = () => {
     onSignOut();
-    navigate('/');
   };
 
   function handleChangeName(evt) {
     setNameInput(evt.target.value);
-    setDisabledBtn();
   }
 
   function handleChangeEmail(evt) {
     setEmailInput(evt.target.value);
-    setDisabledBtn();
   }
 
   function setDisabledBtn() {
@@ -51,6 +48,10 @@ export default function Profile({
       setisDisabledBtn(true);
     }
   }
+
+  useEffect(() => {
+    setDisabledBtn();
+  }, [nameInput, emailInput]);
 
   return (
     <>
@@ -93,6 +94,7 @@ export default function Profile({
               </div>
             </div>
             {errorMsg && <p className='profile__err-msg'>{errorMsg}</p>}
+            {successMsg && <p className='profile__success-msg'>{successMsg}</p>}
             <div className='profile__btn-container'>
               <button
                 className='profile__btn'

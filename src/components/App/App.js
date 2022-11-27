@@ -9,7 +9,7 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
 import getAllMovies from '../../utils/MoviesApi';
-import { register, login } from '../../utils/AuthApi';
+import { register, login, logout } from '../../utils/AuthApi';
 import {
   getApiUserInfo,
   patchUserInfo,
@@ -19,6 +19,15 @@ import {
 } from '../../utils/MainApi';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import {
+  REGISTRATION_ERROR,
+  LOGIN_ERROR,
+  UPDATE_PROFILE_SUCCESS,
+  UPDATE_PROFILE_ERROR,
+  GET_USER_INFO_ERROR,
+  GET_MOVIES_ERROR,
+  GET_SAVED_MOVIES_ERROR,
+} from '../../utils/constants';
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -31,8 +40,9 @@ export default function App() {
   const [moviesInColumn, setMoviesInColumn] = useState(0);
   const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
   const [size, setSize] = useState(window.innerWidth);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [errorMsg, setErrorMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
   const navigate = useNavigate();
 
   function closeBurger() {
@@ -42,43 +52,6 @@ export default function App() {
   function handleClickBurgerButton() {
     setisBurgerOpen(true);
   }
-
-  const handleSearch = (value) => {
-    setIsLoading(true);
-    const filteredMovies = allMovies.filter((movie) => {
-      value = value.toLowerCase();
-      const nameEN = movie.nameEN.toLowerCase();
-      const nameRU = movie.nameRU.toLowerCase();
-      return (nameEN && nameEN.toLowerCase().includes(value) && value !== '') ||
-        (nameRU && nameRU.toLowerCase().includes(value) && value !== '')
-        ? value
-        : null;
-    });
-
-    localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
-    setFilteredMovies(filteredMovies);
-    setIsLoading(false);
-  };
-
-  const handleSavedMovieSearch = (value) => {
-    setIsLoading(true);
-    const filteredSavedMovies = savedMovies.filter((movie) => {
-      value = value.toLowerCase();
-      const nameEN = movie.nameEN.toLowerCase();
-      const nameRU = movie.nameRU.toLowerCase();
-      return (nameEN && nameEN.toLowerCase().includes(value) && value !== '') ||
-        (nameRU && nameRU.toLowerCase().includes(value) && value !== '')
-        ? value
-        : null;
-    });
-
-    localStorage.setItem(
-      'filteredSavedMovies',
-      JSON.stringify(filteredSavedMovies)
-    );
-    setFilteredSavedMovies(filteredSavedMovies);
-    setIsLoading(false);
-  };
 
   const resizeHandler = () => {
     setSize(window.innerWidth);
@@ -92,14 +65,13 @@ export default function App() {
     register({ name, password, email })
       .then((res) => {
         if (res) {
-          setIsLoggedIn(true);
           setErrorMsg('');
-          navigate('/movies');
+          navigate('/signin');
         }
       })
       .catch((err) => {
         setIsLoggedIn(false);
-        setErrorMsg('При регистрации пользователя произошла ошибка.');
+        setErrorMsg(REGISTRATION_ERROR);
       });
   };
 
@@ -110,20 +82,27 @@ export default function App() {
           setIsLoggedIn(true);
           setErrorMsg('');
           setCurrentUser({ password, email });
-
-          navigate('/movies');
+          localStorage.setItem('isShortFilm', false);
+          setTimeout(() => navigate('/movies'), 3000);
         }
       })
       .catch((err) => {
         setIsLoggedIn(false);
-        setErrorMsg('Вы ввели неправильный логин или пароль.');
+        setErrorMsg(LOGIN_ERROR);
       });
   };
 
   const handleSaveMovie = (movie) => {
-    saveMovies(movie).then((res) => {
-      setSavedMovies([...savedMovies, res]);
-    });
+    const isLike = savedMovies.some((i) => i.movieId === movie.id);
+
+    if (!isLike) {
+      saveMovies(movie).then((res) => {
+        setSavedMovies([...savedMovies, res]);
+      });
+    } else {
+      const resMovie = savedMovies.find((i) => i.movieId === movie.id);
+      handleDeleteMovie(resMovie);
+    }
   };
 
   const handleDeleteMovie = (movie) => {
@@ -135,52 +114,55 @@ export default function App() {
     });
   };
 
-  const shortMovieSwitchHandle = (checked) => {
-    // const filterMovies = JSON.parse(localStorage.getItem('filteredMovies'));
-    if (checked === '0' && filteredMovies) {
-      const shortMovies = filteredMovies.filter((item) => item.duration <= 40);
-      setFilteredMovies(shortMovies);
-    } else {
-      setFilteredMovies(allMovies);
-    }
-  };
-
-  const shortSaveMovieSwitchHandle = (checked) => {
-    // const filteredSavedMovies = JSON.parse(
-    //   localStorage.getItem('filteredSavedMovies')
-    // );
-    if (checked === '0' && filteredSavedMovies) {
-      const shortMovies = filteredSavedMovies.filter(
-        (item) => item.duration <= 40
-      );
-      setFilteredSavedMovies(shortMovies);
-    } else {
-      setFilteredSavedMovies(savedMovies);
-    }
-  };
-
-  const userUpdateHandle = (user) => {
-    patchUserInfo(user)
-      .then((res) => setCurrentUser(res))
+  const userUpdateHandle = ({ name, email }) => {
+    patchUserInfo({ name, email })
+      .then((res) => {
+        setCurrentUser(res);
+        setSuccessMsg(UPDATE_PROFILE_SUCCESS);
+        setErrorMsg('');
+      })
       .catch((err) => {
-        setErrorMsg('При обновлении профиля произошла ошибка.');
+        setErrorMsg(UPDATE_PROFILE_ERROR);
+        setSuccessMsg('');
       });
   };
 
   const signOutHandle = () => {
-    localStorage.removeItem('savedMovies');
-    localStorage.removeItem('filteredSavedMovies');
-    setIsLoggedIn(false);
-    setCurrentUser({});
+    logout()
+      .then((res) => {
+        setIsLoggedIn(false);
+        setCurrentUser({});
+        localStorage.clear();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
+  function tokenCheck() {
+    getApiUserInfo()
+      .then((res) => {
+        if (res) {
+          setIsLoggedIn(true);
+        }
+      })
+      .catch((err) => {
+        setIsLoggedIn(false);
+        console.log(err);
+      });
+  }
+
+  useEffect(() => {
+    tokenCheck();
+  }, []);
 
   useEffect(() => {
     if (isLoggedIn) {
       getApiUserInfo()
         .then((res) => setCurrentUser(res))
-        .catch((err) => console.log(`Имя пользователя не получено: ${err}`));
+        .catch((err) => console.log(`${GET_USER_INFO_ERROR} ${err}`));
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, currentUser.name, currentUser.email]);
 
   useEffect(() => {
     window.addEventListener('resize', resizeHandler);
@@ -196,12 +178,16 @@ export default function App() {
       getAllMovies()
         .then((res) => {
           localStorage.setItem('allMovies', JSON.stringify(res));
-          const allMovies = JSON.parse(localStorage.getItem('allMovies'));
-          setAllMovies(allMovies);
-          setFilteredMovies(allMovies);
+          const movies = JSON.parse(localStorage.getItem('allMovies'));
+          setAllMovies(movies);
+          if (localStorage.getItem('filteredMovies') !== null) {
+            setFilteredMovies(
+              JSON.parse(localStorage.getItem('filteredMovies'))
+            );
+          }
         })
         .catch((err) => {
-          console.log(`Ошибка запроса: ${err}`);
+          console.log(`${GET_MOVIES_ERROR} ${err}`);
         })
         .finally(() => setIsLoading(false));
     }
@@ -218,10 +204,9 @@ export default function App() {
           );
           const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
           setSavedMovies(savedMovies);
-          setFilteredSavedMovies(savedMovies);
         })
         .catch((err) => {
-          console.log(`Сохраненные фильмы не удалось получить: ${err}`);
+          console.log(`${GET_SAVED_MOVIES_ERROR} ${err}`);
         })
         .finally(() => setIsLoading(false));
     }
@@ -266,17 +251,19 @@ export default function App() {
                   isBurgerOpen={isBurgerOpen}
                   openBurger={handleClickBurgerButton}
                   closeBurger={closeBurger}
-                  cardList={filteredMovies}
                   isLoading={isLoading}
-                  onSearchSubmit={handleSearch}
+                  setIsLoading={setIsLoading}
                   currentMovieLength={currentMovieLength}
                   onClickMore={handleClickMore}
                   onRegistered={handleRegister}
                   isLoggedIn={isLoggedIn}
                   size={size}
-                  onBtnClick={handleSaveMovie}
+                  onLike={handleSaveMovie}
+                  onDelete={handleDeleteMovie}
                   savedMovies={savedMovies}
-                  shortSwitchHandle={shortMovieSwitchHandle}
+                  allMovies={allMovies}
+                  setFilteredMovies={setFilteredMovies}
+                  filteredMovies={filteredMovies}
                 />
               </ProtectedRoute>
             }
@@ -292,15 +279,16 @@ export default function App() {
                   closeBurger={closeBurger}
                   cardList={filteredSavedMovies}
                   isLoading={isLoading}
-                  onSearchSubmit={handleSavedMovieSearch}
+                  setIsLoading={setIsLoading}
                   currentMovieLength={currentMovieLength}
                   onClickMore={handleClickMore}
                   onRegistered={handleRegister}
                   isLoggedIn={isLoggedIn}
                   size={size}
-                  onBtnClick={handleDeleteMovie}
+                  onDelete={handleDeleteMovie}
                   savedMovies={savedMovies}
-                  shortSwitchHandle={shortSaveMovieSwitchHandle}
+                  setFilteredSavedMovies={setFilteredSavedMovies}
+                  filteredSavedMovies={filteredSavedMovies}
                 />
               </ProtectedRoute>
             }
@@ -319,6 +307,7 @@ export default function App() {
                   errorMsg={errorMsg}
                   isBurgerOpen={isBurgerOpen}
                   closeBurger={closeBurger}
+                  successMsg={successMsg}
                 />
               </ProtectedRoute>
             }

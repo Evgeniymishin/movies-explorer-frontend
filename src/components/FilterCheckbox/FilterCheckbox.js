@@ -1,20 +1,34 @@
 import './FilterCheckbox.css';
-import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
-export default function FilterCheckbox({ shortSwitchHandle }) {
-  const [checked, setChecked] = useState('0');
+export default function FilterCheckbox({ isShortFilm, setIsShortFilm }) {
+  const location = useLocation();
 
   const handleSwitchHandle = () => {
-    setChecked(checked === '0' ? '1' : '0');
-    shortSwitchHandle(checked);
+    if (location.pathname === '/movies') {
+      if (localStorage.getItem('isShortFilm') === 'true') {
+        localStorage.setItem('isShortFilm', 'false');
+        setIsShortFilm('false');
+      } else {
+        localStorage.setItem('isShortFilm', 'true');
+        setIsShortFilm('true');
+      }
+    } else {
+      console.log(isShortFilm);
+      if (isShortFilm === 'true') {
+        setIsShortFilm('false');
+        console.log(isShortFilm);
+      } else {
+        setIsShortFilm('true');
+        console.log(isShortFilm);
+      }
+    }
   };
 
   return (
     <div className='filer-checkbox'>
       <button
-        className={`filter-checkbox__button filter-checkbox__button_active_${
-          checked === '0' ? 'false' : 'true'
-        }`}
+        className={`filter-checkbox__button filter-checkbox__button_active_${isShortFilm}`}
         type='button'
         onClick={handleSwitchHandle}
       ></button>

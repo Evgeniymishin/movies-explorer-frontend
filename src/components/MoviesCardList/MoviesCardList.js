@@ -2,6 +2,7 @@ import MoreButton from '../MoreButton/MoreButton';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
 import './MoviesCardList.css';
+import { useLocation } from 'react-router-dom';
 
 export default function MoviesCardList({
   cardList,
@@ -10,29 +11,51 @@ export default function MoviesCardList({
   onClickMore,
   onBtnClick,
   savedMovies,
+  isEmptySearchResult,
+  onLike,
+  onDelete,
 }) {
+  const location = useLocation();
   return (
     <section className='movie-card-list'>
       {isLoading && <Preloader />}
       {!isLoading && (
         <div className='movie-card-list__grid'>
-          {cardList
-            .map((card) => {
+          {location.pathname === '/movies' &&
+            cardList &&
+            cardList
+              .map((card) => {
+                return (
+                  <MoviesCard
+                    card={card}
+                    onBtnClick={onBtnClick}
+                    onLike={onLike}
+                    onDelete={onDelete}
+                    savedMovies={savedMovies}
+                  />
+                );
+              })
+              .slice(0, currentMovieLength)}
+          {location.pathname !== '/movies' &&
+            cardList &&
+            cardList.map((card) => {
               return (
                 <MoviesCard
                   card={card}
-                  onBtnClick={onBtnClick}
+                  onDelete={onDelete}
                   savedMovies={savedMovies}
+                  onLike={onLike}
                 />
               );
-            })
-            .slice(0, currentMovieLength)}
+            })}
         </div>
       )}
       {!isLoading &&
-        (cardList.length === 0 && !isLoading ? (
+        (isEmptySearchResult === 'true' && !isLoading ? (
           <p>Ничего не найдено</p>
         ) : (
+          location.pathname === '/movies' &&
+          cardList &&
           cardList.length > currentMovieLength && (
             <MoreButton onClickMore={onClickMore} />
           )
