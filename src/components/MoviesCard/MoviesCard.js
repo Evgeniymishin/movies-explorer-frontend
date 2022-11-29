@@ -1,10 +1,12 @@
 import './MoviesCard.css';
-import { baseMoviesApiURL } from '../../utils/constants';
+import { baseMoviesApiURL, MIN_IN_HOURS } from '../../utils/constants';
 import { useLocation } from 'react-router-dom';
 
 export default function MoviesCard({ card, savedMovies, onLike, onDelete }) {
   const location = useLocation();
-  const duration = `${Math.floor(card.duration / 60)}ч ${card.duration % 60}м`;
+  const duration = `${Math.floor(card.duration / MIN_IN_HOURS)}ч ${
+    card.duration % MIN_IN_HOURS
+  }м`;
 
   const src =
     location.pathname === '/movies'

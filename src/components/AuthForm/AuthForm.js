@@ -1,12 +1,15 @@
 import Logo from '../Logo/Logo';
 import './AuthForm.css';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function AuthForm(props) {
+  const [disabledBtn, setDisabledBtn] = useState(false);
   const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
+    setDisabledBtn(true);
     if (props.isValid) {
       props.onSubmit(props.values);
     }
@@ -25,7 +28,7 @@ export default function AuthForm(props) {
           <button
             className='auth-form__btn'
             type='submit'
-            disabled={!props.isValid}
+            disabled={!props.isValid || disabledBtn}
           >
             {props.btnName}
           </button>

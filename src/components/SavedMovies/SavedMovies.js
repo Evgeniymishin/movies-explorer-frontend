@@ -52,7 +52,6 @@ export default function SavedMovies({
       <Header
         color='white'
         isLoggedIn={isLoggedIn}
-        activeLink='saved-movie'
         openBurger={openBurger}
         size={size}
         closeBurger={closeBurger}

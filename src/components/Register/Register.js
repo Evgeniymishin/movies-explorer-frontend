@@ -2,7 +2,7 @@ import AuthForm from '../AuthForm/AuthForm';
 import './Register.css';
 import { FormValidation } from '../../utils/FormValidation';
 
-export default function Register({ onRegistered }) {
+export default function Register({ onRegistered, errorMsg }) {
   const { values, handleChange, isValid, errors } = FormValidation();
 
   return (
@@ -15,6 +15,7 @@ export default function Register({ onRegistered }) {
       onSubmit={onRegistered}
       values={values}
       isValid={isValid}
+      errorMsg={errorMsg}
     >
       <label className='auth-form__label'>
         Имя

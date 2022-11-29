@@ -21,7 +21,6 @@ export default function Main({
         color='grey'
         isLoggedIn={isLoggedIn}
         size={size}
-        activeLink='none'
         openBurger={openBurger}
       />
       <main>

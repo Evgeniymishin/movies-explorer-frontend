@@ -27,6 +27,16 @@ import {
   GET_USER_INFO_ERROR,
   GET_MOVIES_ERROR,
   GET_SAVED_MOVIES_ERROR,
+  NAVIGATE_TIMEOUT_TIME,
+  LAPTOP_SIZE,
+  LAPTOP_COLUMN_MOVIE,
+  LAPTOP_MOVIES_IN_PAGE,
+  TABLE_SIZE,
+  TABLE_COLUMN_MOVIE,
+  TABLE_MOVIES_IN_PAGE,
+  PHONE_SIZE,
+  PHONE_COLUMN_MOVIE,
+  PHONE_MOVIES_IN_PAGE,
 } from '../../utils/constants';
 
 export default function App() {
@@ -42,6 +52,8 @@ export default function App() {
   const [size, setSize] = useState(window.innerWidth);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [errorMsg, setErrorMsg] = useState('');
+  const [errorLogMsg, setErrorLogMsg] = useState('');
+  const [errorRegMsg, setErrorRegMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
   const navigate = useNavigate();
 
@@ -65,13 +77,13 @@ export default function App() {
     register({ name, password, email })
       .then((res) => {
         if (res) {
-          setErrorMsg('');
-          navigate('/signin');
+          setErrorRegMsg('');
+          handleLogin({ password, email });
         }
       })
       .catch((err) => {
         setIsLoggedIn(false);
-        setErrorMsg(REGISTRATION_ERROR);
+        setErrorRegMsg(REGISTRATION_ERROR);
       });
   };
 
@@ -80,15 +92,15 @@ export default function App() {
       .then((res) => {
         if (res) {
           setIsLoggedIn(true);
-          setErrorMsg('');
+          setErrorLogMsg('');
           setCurrentUser({ password, email });
           localStorage.setItem('isShortFilm', false);
-          setTimeout(() => navigate('/movies'), 3000);
+          setTimeout(() => navigate('/movies'), NAVIGATE_TIMEOUT_TIME);
         }
       })
       .catch((err) => {
         setIsLoggedIn(false);
-        setErrorMsg(LOGIN_ERROR);
+        setErrorLogMsg(LOGIN_ERROR);
       });
   };
 
@@ -130,9 +142,21 @@ export default function App() {
   const signOutHandle = () => {
     logout()
       .then((res) => {
-        setIsLoggedIn(false);
-        setCurrentUser({});
         localStorage.clear();
+        setCurrentUser({});
+        setisBurgerOpen(false);
+        setIsLoading(false);
+        setAllMovies([]);
+        setFilteredMovies([]);
+        setSavedMovies([]);
+        setCurrentMovieLength(0);
+        setMoviesInColumn(0);
+        setFilteredSavedMovies([]);
+        setIsLoggedIn(false);
+        setErrorMsg('');
+        setErrorLogMsg('');
+        setErrorRegMsg('');
+        setSuccessMsg('');
       })
       .catch((err) => {
         console.log(err);
@@ -147,7 +171,7 @@ export default function App() {
         }
       })
       .catch((err) => {
-        setIsLoggedIn(false);
+        signOutHandle();
         console.log(err);
       });
   }
@@ -213,15 +237,15 @@ export default function App() {
   }, [currentUser._id, isLoggedIn]);
 
   useEffect(() => {
-    if (size >= 1280) {
-      setMoviesInColumn(3);
-      setCurrentMovieLength(12);
-    } else if (size >= 768 && size < 1280) {
-      setMoviesInColumn(2);
-      setCurrentMovieLength(8);
-    } else if (size >= 320 && size < 768) {
-      setMoviesInColumn(1);
-      setCurrentMovieLength(5);
+    if (size >= LAPTOP_SIZE) {
+      setMoviesInColumn(LAPTOP_COLUMN_MOVIE);
+      setCurrentMovieLength(LAPTOP_MOVIES_IN_PAGE);
+    } else if (size >= TABLE_SIZE && size < LAPTOP_SIZE) {
+      setMoviesInColumn(TABLE_COLUMN_MOVIE);
+      setCurrentMovieLength(TABLE_MOVIES_IN_PAGE);
+    } else if (size >= PHONE_SIZE && size < TABLE_SIZE) {
+      setMoviesInColumn(PHONE_COLUMN_MOVIE);
+      setCurrentMovieLength(PHONE_MOVIES_IN_PAGE);
     }
   }, [size]);
 
@@ -316,13 +340,13 @@ export default function App() {
             exact
             path='/signup'
             element={
-              <Register onRegistered={handleRegister} errorMsg={errorMsg} />
+              <Register onRegistered={handleRegister} errorMsg={errorRegMsg} />
             }
           />
           <Route
             exact
             path='/signin'
-            element={<Login onLogin={handleLogin} errorMsg={errorMsg} />}
+            element={<Login onLogin={handleLogin} errorMsg={errorLogMsg} />}
           />
           <Route path='*' element={<NotFound />} />
         </Routes>

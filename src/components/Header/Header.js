@@ -4,11 +4,11 @@ import BurgerButton from '../BurgerButton/BurgerButton';
 import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 import './Header.css';
+import { TABLE_SIZE } from '../../utils/constants';
 
 export default function Header({
   color,
   isLoggedIn,
-  activeLink,
   openBurger,
   size,
   closeBurger,
@@ -20,9 +20,9 @@ export default function Header({
         {!isLoggedIn && <AuthBar />}
         {isLoggedIn && (
           <>
-            {<Navigation activeLink={activeLink} />}
-            {size > 780 && <AccountBar closeBurger={closeBurger} />}
-            {size <= 780 && <BurgerButton openBurger={openBurger} />}
+            {<Navigation />}
+            {size > TABLE_SIZE && <AccountBar closeBurger={closeBurger} />}
+            {size <= TABLE_SIZE && <BurgerButton openBurger={openBurger} />}
           </>
         )}
       </div>

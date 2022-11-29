@@ -4,6 +4,7 @@ import { FormValidation } from '../../utils/FormValidation';
 
 export default function Login({ onLogin, errorMsg }) {
   const { values, handleChange, isValid, errors } = FormValidation();
+
   return (
     <AuthForm
       title='Рады видеть!'

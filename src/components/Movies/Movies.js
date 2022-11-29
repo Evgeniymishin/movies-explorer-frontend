@@ -58,7 +58,6 @@ export default function Movies({
       <Header
         color='white'
         isLoggedIn={isLoggedIn}
-        activeLink='movie'
         openBurger={openBurger}
         size={size}
         closeBurger={closeBurger}
