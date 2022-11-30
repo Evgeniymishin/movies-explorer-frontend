@@ -149,8 +149,6 @@ export default function App() {
         setAllMovies([]);
         setFilteredMovies([]);
         setSavedMovies([]);
-        setCurrentMovieLength(0);
-        setMoviesInColumn(0);
         setFilteredSavedMovies([]);
         setIsLoggedIn(false);
         setErrorMsg('');
