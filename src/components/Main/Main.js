@@ -6,11 +6,23 @@ import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
-export default function Main() {
+export default function Main({
+  isLoggedIn,
+  size,
+  isBurgerOpen,
+  closeBurger,
+  openBurger,
+}) {
   return (
     <>
-      <Header color='grey' isLoggedIn={false} />
+      <Header
+        color='grey'
+        isLoggedIn={isLoggedIn}
+        size={size}
+        openBurger={openBurger}
+      />
       <main>
         <Promo />
         <NavTab />
@@ -19,6 +31,7 @@ export default function Main() {
         <AboutMe />
       </main>
       <Footer />
+      <BurgerMenu isBurgerOpen={isBurgerOpen} closeBurger={closeBurger} />
     </>
   );
 }

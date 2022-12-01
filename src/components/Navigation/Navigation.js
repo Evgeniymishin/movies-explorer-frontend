@@ -1,7 +1,10 @@
 import './Navigation.css';
 import { HashLink } from 'react-router-hash-link';
+import { useLocation } from 'react-router-dom';
 
-export default function Navigation({ isFilmActive }) {
+export default function Navigation() {
+  const location = useLocation();
+
   function scrollIntoView(el) {
     el.scrollIntoView({
       behavior: 'smooth',
@@ -13,7 +16,7 @@ export default function Navigation({ isFilmActive }) {
     <ul className='navigation'>
       <li
         className={`navigation__element ${
-          isFilmActive && 'navigation__element_active'
+          location.pathname === '/movies' && 'navigation__element_active'
         }`}
       >
         <HashLink
@@ -26,7 +29,7 @@ export default function Navigation({ isFilmActive }) {
       </li>
       <li
         className={`navigation__element ${
-          !isFilmActive && 'navigation__element_active'
+          location.pathname === '/saved-movies' && 'navigation__element_active'
         }`}
       >
         <HashLink

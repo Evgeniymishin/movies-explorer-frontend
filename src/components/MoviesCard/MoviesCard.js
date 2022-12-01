@@ -1,18 +1,49 @@
 import './MoviesCard.css';
-import img from '../../images/movie_card.png';
+import { baseMoviesApiURL, MIN_IN_HOURS } from '../../utils/constants';
+import { useLocation } from 'react-router-dom';
 
-export default function MoviesCard({ buttonType, buttonText }) {
+export default function MoviesCard({ card, savedMovies, onLike, onDelete }) {
+  const location = useLocation();
+  const duration = `${Math.floor(card.duration / MIN_IN_HOURS)}ч ${
+    card.duration % MIN_IN_HOURS
+  }м`;
+
+  const src =
+    location.pathname === '/movies'
+      ? `${baseMoviesApiURL}/${card.image.url}`
+      : card.image;
+  const buttonType =
+    location.pathname === '/movies'
+      ? card.id && savedMovies.some((i) => i.movieId === card.id)
+        ? 'checked'
+        : 'save'
+      : 'delete';
+  const buttonText = buttonType === 'save' ? 'Сохранить' : '';
+
+  const handleBtnClick = () => {
+    location.pathname === '/movies' ? onLike(card) : onDelete(card);
+  };
+
   return (
-    <figure className='movies-card'>
-      <img className='movies-card__img' src={img} alt='Изображение' />
+    <figure className='movies-card' id={card.id}>
+      <a
+        className='movies-card__link'
+        href={card.trailerLink}
+        target='_blank'
+        rel='noreferrer'
+      >
+        <img className='movies-card__img' src={src} alt={card.nameRU} />
+      </a>
       <div className='movies-card__caption-container'>
-        <figcaption className='movies-card__caption'>
-          33 слова о дизайне
-        </figcaption>
+        <figcaption className='movies-card__caption'>{card.nameRU}</figcaption>
         <div className='movies-card__duration-container'>
-          <div className='movies-card__duration'>1ч 17м</div>
+          <div className='movies-card__duration'>{duration}</div>
         </div>
-        <button className={`movies-card__${buttonType}-btn`} type='button'>
+        <button
+          className={`movies-card__${buttonType}-btn`}
+          type='button'
+          onClick={handleBtnClick}
+        >
           {buttonText}
         </button>
       </div>
